@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* FIT29 — Miami Vibrant tokens (HSL) */
+    --warm-ivory: 232 48% 5%;       /* base canvas — near-black navy */
+    --panel: 234 55% 3%;            /* deepest panel (footer, banners) */
+    --charcoal: 220 40% 97%;        /* primary text on dark */
+    --stone: 232 40% 10%;           /* elevated surface */
+    --surface: 233 42% 8%;          /* card surface */
+    --line: 250 35% 22%;            /* hairlines / borders */
+
+    --neon-magenta: 320 95% 60%;
+    --neon-pink: 340 95% 64%;
+    --neon-cyan: 187 95% 58%;
+    --neon-aqua: 168 85% 58%;
+    --neon-violet: 264 90% 66%;
+    --neon-orange: 24 95% 60%;
+
+    /* legacy names kept so existing components stay untouched */
+    --deep-forest: var(--neon-magenta);      /* primary CTA */
+    --deep-forest-dark: 320 95% 48%;
+    --terracotta: var(--neon-cyan);          /* accent */
+    --soft-gold: var(--neon-aqua);
+
+    --gradient-neon: linear-gradient(90deg, hsl(var(--neon-magenta)) 0%, hsl(var(--neon-violet)) 50%, hsl(var(--neon-cyan)) 100%);
+    --gradient-cta: linear-gradient(120deg, hsl(var(--neon-magenta)) 0%, hsl(var(--neon-violet)) 55%, hsl(var(--neon-cyan)) 130%);
+    --gradient-card: linear-gradient(160deg, hsl(232 42% 12% / 0.95) 0%, hsl(234 50% 6% / 0.95) 100%);
+    --gradient-atmos: radial-gradient(120% 90% at 12% 0%, hsl(var(--neon-violet) / 0.22) 0%, transparent 60%),
+                      radial-gradient(90% 70% at 88% 12%, hsl(var(--neon-cyan) / 0.16) 0%, transparent 62%),
+                      radial-gradient(80% 60% at 50% 108%, hsl(var(--neon-magenta) / 0.18) 0%, transparent 65%);
+    --shadow-glow: 0 0 0 1px hsl(var(--neon-violet) / 0.28), 0 18px 60px -18px hsl(var(--neon-magenta) / 0.55);
+    --shadow-soft: 0 24px 70px -28px hsl(234 60% 2% / 0.9);
+    --glow-text: 0 0 28px hsl(var(--neon-violet) / 0.45);
+
+    --background: var(--warm-ivory);
+    --foreground: var(--charcoal);
+    --card: var(--surface);
+    --card-foreground: var(--charcoal);
+    --popover: var(--stone);
+    --popover-foreground: var(--charcoal);
+    --primary: var(--neon-magenta);
+    --primary-foreground: 0 0% 100%;
+    --secondary: var(--stone);
+    --secondary-foreground: var(--charcoal);
+    --muted: var(--stone);
+    --muted-foreground: 225 18% 70%;
+    --accent: var(--neon-cyan);
+    --accent-foreground: 234 55% 5%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: var(--line);
+    --input: var(--line);
+    --ring: var(--neon-violet);
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Manrope', 'Inter', sans-serif;
+    font-size: clamp(1.0625rem, 0.95rem + 0.35vw, 1.25rem); /* 17→20px */
+    line-height: 1.6;
+    font-weight: 300;
+    letter-spacing: -0.005em;
+  }
+  p { line-height: 1.6; }
+  small, .text-small { font-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem); line-height: 1.55; }
+  h1, h2, h3, h4 {
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: -0.035em;
+    font-weight: 300;
+    color: hsl(var(--charcoal));
+  }
+  h1 { font-size: clamp(2.5rem, 1.2rem + 5.6vw, 4.5rem); line-height: 1.02; letter-spacing: -0.045em; }
+  h2 { font-size: clamp(2rem, 1.2rem + 3.4vw, 3rem); line-height: 1.08; letter-spacing: -0.035em; }
+  h3 { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2rem); line-height: 1.15; letter-spacing: -0.025em; }
+  h4 { font-size: clamp(1.25rem, 1rem + 0.9vw, 1.5rem); line-height: 1.25; letter-spacing: -0.02em; }
+}
+
+@layer components {
+  /* Primary neon CTA */
+  .btn-pill {
+    @apply inline-flex items-center justify-center rounded-full transition-all duration-500;
+    background-image: var(--gradient-cta);
+    color: #fff;
+    box-shadow: 0 12px 40px -12px hsl(var(--neon-magenta) / 0.7);
+    height: 56px;
+    padding: 0 36px;
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .btn-pill:hover { letter-spacing: 0.22em; box-shadow: 0 16px 54px -10px hsl(var(--neon-violet) / 0.85); }
+
+  .btn-pill-light {
+    @apply inline-flex items-center justify-center rounded-full transition-all duration-500;
+    background-color: hsl(var(--charcoal) / 0.04);
+    color: hsl(var(--charcoal));
+    border: 1px solid hsl(var(--neon-cyan) / 0.45);
+    height: 52px;
+    padding: 0 32px;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .btn-pill-light:hover {
+    border-color: hsl(var(--neon-cyan));
+    color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 32px -8px hsl(var(--neon-cyan) / 0.6);
+  }
+
+  .btn-pill-dark {
+    @apply inline-flex items-center justify-center rounded-full transition-all duration-500;
+    background-image: var(--gradient-cta);
+    color: #fff;
+    box-shadow: 0 12px 40px -12px hsl(var(--neon-violet) / 0.7);
+    height: 56px;
+    padding: 0 36px;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .btn-pill-dark:hover { letter-spacing: 0.22em; box-shadow: 0 16px 54px -10px hsl(var(--neon-magenta) / 0.85); }
+
+  .site-container { @apply mx-auto px-8 md:px-12; max-width: 1440px; }
+  .site-inner { @apply mx-auto; max-width: 1280px; }
+  .section-pad { padding: 120px 0; }
+  @media (max-width: 991px) { .section-pad { padding: 72px 0; } }
+
+  .hairline-soft { border-bottom: 1px solid hsl(var(--line)); }
+  .radius-card { border-radius: 1.2rem; }
+
+  /* Editorial type scale — Manrope, premium hierarchy */
+  .display-xl {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(3rem, 1.4rem + 6.8vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    font-weight: 200;
+  }
+  .display-lg {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(2.5rem, 1.2rem + 5.6vw, 4.5rem); /* 72px desktop */
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    font-weight: 300;
+  }
+  .display-md {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(2rem, 1.2rem + 3.4vw, 3rem); /* 48px desktop */
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 300;
+  }
+  .display-sm {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2rem); /* 32px desktop */
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+  }
+  .body-lg {
+    font-size: clamp(1.125rem, 1rem + 0.4vw, 1.25rem); /* 20px */
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .serif-italic { font-style: italic; font-weight: 300; letter-spacing: -0.02em; }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: hsl(var(--neon-cyan) / 0.9);
+  }
+  .eyebrow-gold { color: hsl(var(--neon-aqua)); }
+
+  .hairline { border-top: 1px solid hsl(var(--line)); }
+}
+
+@layer utilities {
+  .fade-up { animation: fadeUp 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .quiet-zoom img { transition: transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1); }
+  .quiet-zoom:hover img { transform: scale(1.04); }
+
+  /* Miami Vibrant atmospherics */
+  .atmos { position: relative; isolation: isolate; }
+  .atmos::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-atmos);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .streaks::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      linear-gradient(96deg, transparent 8%, hsl(var(--neon-cyan) / 0.16) 22%, transparent 34%),
+      linear-gradient(84deg, transparent 58%, hsl(var(--neon-magenta) / 0.14) 74%, transparent 86%);
+    filter: blur(18px);
+  }
+  .glow-text { text-shadow: var(--glow-text); }
+  .neon-gradient-text {
+    background-image: var(--gradient-neon);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass-card {
+    background-image: var(--gradient-card);
+    border: 1px solid hsl(var(--line));
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 500ms, border-color 500ms, transform 500ms;
+  }
+  .glass-card:hover {
+    border-color: hsl(var(--neon-violet) / 0.55);
+    box-shadow: var(--shadow-glow);
+  }
+  .glow-ring { box-shadow: var(--shadow-glow); }
+
+  /* ============================================================
+     NEON HEADLINE — signature illuminated-signage treatment.
+     Use on ONE primary headline (largest H1/H2) per major section.
+     Variants: .neon-magenta (default) .neon-cyan .neon-aqua .neon-violet
+     ============================================================ */
+  .neon-headline {
+    --nh: var(--neon-magenta);
+    position: relative;
+    isolation: isolate;
+    display: block;
+    color: hsl(0 0% 100%);
+    /* refined tube glow: crisp core, tight halo, minimal diffusion */
+    text-shadow:
+      0 0 1px hsl(var(--nh) / 0.55),
+      0 0 2px hsl(0 0% 100% / 0.4),
+      0 0 6px hsl(var(--nh) / 0.5),
+      0 0 13px hsl(var(--nh) / 0.34),
+      0 0 26px hsl(var(--nh) / 0.18);
+    /* subtle bloom hugging the glyph edges */
+    filter:
+      drop-shadow(0 0 1px hsl(var(--nh) / 0.45))
+      drop-shadow(0 0 8px hsl(var(--nh) / 0.22));
+    will-change: filter;
+  }
+  /* faint ambient illumination, kept tight around the letters */
+  .neon-headline::before {
+    content: "";
+    position: absolute;
+    inset: -14% -3%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      48% 52% at 50% 50%,
+      hsl(var(--nh) / 0.12) 0%,
+      hsl(var(--nh) / 0.05) 40%,
+      transparent 70%
+    );
+    filter: blur(16px);
+  }
+  .neon-headline .neon-gradient-text {
+    text-shadow: none;
+    filter: drop-shadow(0 0 5px hsl(var(--nh) / 0.3));
+  }
+  .neon-magenta { --nh: var(--neon-magenta); }
+  .neon-cyan    { --nh: var(--neon-cyan); }
+  .neon-aqua    { --nh: var(--neon-aqua); }
+  .neon-violet  { --nh: var(--neon-violet); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .neon-headline { will-change: auto; }
+  }
+}
+
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
